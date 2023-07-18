@@ -1,28 +1,28 @@
 #include <iostream>
 #include <vector>
-#include <math.h>
-
+#include <cmath>
+#include <array>
 
 
 class Circle {
-  public:
-    double radius;
+    private:
+      double radius;
+    public:
+      Circle(double r){
+        this->radius = r;
+      }
 
-    Circle(double r){
-      this->radius = r;
-    }
-
-    double area(){
-      return (M_PI) * (pow(radius, 2));
-    }
+      double area(){
+        return (M_PI) * (pow(radius, 2));
+      }
 };
 
 class Point {
-  public:
-
+  private:
     double x;
     double y;
 
+  public:
     Point(double x_val, double y_val){
       this->x = x_val;
       this->y = y_val;
@@ -46,18 +46,20 @@ class Point {
 }
 
 class Line {
-  public:
-    Point p1,p2;
+    private:
+      Point p1,p2;
 
-    double length(){
-      return sqrt(pow((p1.x - p2.x),2) + pow((p1.x - p2.x),2)) 
-    }
+    public:
+      double length(){
+        return sqrt(pow((p1.x - p2.x),2) + pow((p1.x - p2.x),2)) 
+      }
 }
 
 class Triangle {
-  public:
-    Point p1,p2,p3
+  private:
+    Point p1,p2,p3;
 
+  public:
     double area(){
       // use herons formula where a = sqrt(s(s-a)(s-b)(s-c)), where s = (a+b+c)/2
       double a = p1.distance_to_point(p2);
@@ -71,35 +73,43 @@ class Triangle {
 }
 
 class Polygon {
-  public:
+  private:
     std::vector<Point> points;
     double perimeter = 0;
+  public:
 
     double area(){
-      // Designated point of 
-
-
+      // Designated point of
+      double p_area = 0;
+      for(int i = 0; i < points.size() - 1; i++){
+        Triangle sector(points[0], points[i], points[i+1]);
+        p_area += sector.area();
+      }
+      return p_area;
     }
 
     double perimeter(){
-      for(int i = 1; i < size(points); i++){
+      for(int i = 1; i < points.size() - 1; i++){
         perimeter += sqrt(pow(points[i].x - points[i-1].x, 2) + pow(points[i].y - points[i-1].y, 2))
+        //check
       }
+      return perimeter;
     }
 }
 
 class AUV {
-  public:
+  private:
     std::string name;
     Point position;
     double depth;
     double heading;
-    int speed[3];
+    double speed[3];
     double angular_speed;
-
+  public:
     void step(double dt){
-      position.x += speed[0] * dt;
-      position.y += speed[1] * dt;
+      //heading?
+      position.setX(position.getX() + speed[0] * dt);
+      position.setY(position.getY() + speed[1] * dt);
     }
 
     void apply_acceleration(double a[3], double dt){
