@@ -9,6 +9,9 @@ int multiply(int x, int y){
 }
 
 int divide(int x , int y){
+  if(y == 0){
+    std::cerr << "Cannot divide by zero!" << std::endl;
+  }
   return (x / y);
 }
 
@@ -31,7 +34,7 @@ int main()
   int v = 5;
   std::cout << x+y+z+w+v << std::endl;
 
-
+  std::cout << divide(2,0) << std::endl;
 
   return 0;
 }
