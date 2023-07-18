@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <array>
 #include <math.h>
 
 
@@ -98,15 +99,18 @@ class AUV {
     double angular_speed;
 
     void step(double dt){
-
+      position.x += speed[0] * dt;
+      position.y += speed[1] * dt;
     }
 
     void apply_acceleration(double a[3], double dt){
-      
+      for(int i = 0; i < 3; i++){
+        speed[i] += (a[i]) * dt;
+      }
     }
 
     void apply_angular_acceleration(double angular_acceleration){
-
+      angular_speed += angular_acceleration * dt;
     }
 }
 
