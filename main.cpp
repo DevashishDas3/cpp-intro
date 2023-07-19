@@ -1,7 +1,9 @@
 #include <iostream>
+#include "Point.hpp"
 #include <vector>
 #include <cmath>
 #include <array>
+
 
 
 class Circle {
@@ -17,7 +19,15 @@ class Circle {
       }
 };
 
+/*
 class Point {
+  
+  A point class that holds x and y coordinate points (double) and 
+  each of which has functions to find distance to line, point, and origin
+
+  DELETED
+  
+
   private:
     double x;
     double y;
@@ -37,15 +47,21 @@ class Point {
     }
 
     double distance_to_line(Line l){
-      double A = (l.p1.y - l.p2.y);
+      double A = -(l.p1.y - l.p2.y);
       double B = (l.p1.x - l.p2.x);
-      double C = (A)(l.p1.x) + (B)(l.p1.y)
+      //which should be negative
+      double C = (A)*(l.p1.x) + (B)*(l.p1.y);
 
       return (abs((A) * l.p1.x + (B) * l.p1.y + (C)))/sqrt(pow(A, 2) + pow(B, 2))
     }
 }
+*/
 
 class Line {
+  /*
+  Line class for problems 3 and 4 (contains points p1 and p2 and functionality of
+  finding the length using the distacne formula)
+  */
     private:
       Point p1,p2;
 
@@ -53,31 +69,39 @@ class Line {
       double length(){
         return sqrt(pow((p1.x - p2.x),2) + pow((p1.x - p2.x),2)) 
       }
-}
+};
 
 class Triangle {
+  /*
+  Triangle class contains three points
+  */
   private:
     Point p1,p2,p3;
 
   public:
     double area(){
-      // use herons formula where a = sqrt(s(s-a)(s-b)(s-c)), where s = (a+b+c)/2
+
+      /*
+      use herons formula where a = sqrt(s(s-a)(s-b)(s-c)), where s = (a+b+c)/2
+
+      */
+
       double a = p1.distance_to_point(p2);
       double b = p2.distance_to_point(p3);
       double c = p3.distance_to_point(p1);
 
       double s = (a+b+c)/2;
 
-      return sqrt(s*(s-a)*(s-b)*(s-c));
+      return sqrt(s*((s-a)*(s-b)*(s-c)));
     }
-}
+};
 
 class Polygon {
   private:
     std::vector<Point> points;
     double perimeter = 0;
-  public:
 
+  public:
     double area(){
       // Designated point of
       double p_area = 0;
@@ -95,7 +119,7 @@ class Polygon {
       }
       return perimeter;
     }
-}
+};
 
 class AUV {
   private:
@@ -105,11 +129,12 @@ class AUV {
     double heading;
     double speed[3];
     double angular_speed;
+
   public:
     void step(double dt){
       //heading?
-      position.setX(position.getX() + speed[0] * dt);
-      position.setY(position.getY() + speed[1] * dt);
+      position.x = (position.x + speed[0] * dt);
+      position.y = (position.y + speed[1] * dt);
     }
 
     void apply_acceleration(double a[3], double dt){
@@ -118,10 +143,10 @@ class AUV {
       }
     }
 
-    void apply_angular_acceleration(double angular_acceleration){
+    void apply_angular_acceleration(double angular_acceleration, double  dt){
       angular_speed += angular_acceleration * dt;
     }
-}
+};
 
 
 int subtract(int x, int y){
@@ -139,8 +164,7 @@ int divide(int x , int y){
   return (x / y);
 }
 
-int main()
-{
+int main() {
   std::cout << "Hello, world!" << std::endl;
 
   int x = 5;
