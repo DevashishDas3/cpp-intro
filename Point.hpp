@@ -11,6 +11,10 @@ public:
 
   double x(){ return m_d_x; }
   double y(){ return m_d_y; }
+
+  void setX(double x_val){m_d_x = x_val;}
+  void setY(double y_val){m_d_y = y_val;}
+  
   double distance_to_origin();
   double distance_to_point(Point p);
 };

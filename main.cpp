@@ -22,10 +22,10 @@ class Circle {
 /*
 class Point {
   
-  A point class that holds x and y coordinate points (double) and 
-  each of which has functions to find distance to line, point, and origin
+  //A point class that holds x and y coordinate points (double) and 
+  //each of which has functions to find distance to line, point, and origin
 
-  DELETED
+  //DELETED
   
 
   private:
@@ -47,12 +47,12 @@ class Point {
     }
 
     double distance_to_line(Line l){
-      double A = -(l.p1.y - l.p2.y);
-      double B = (l.p1.x - l.p2.x);
+      double A = -(l.p1.y() - l.p2.y());
+      double B = (l.p1.x() - l.p2.x());
       //which should be negative
-      double C = (A)*(l.p1.x) + (B)*(l.p1.y);
+      double C = (A)*(l.p1.x()) + (B)*(l.p1.y());
 
-      return (abs((A) * l.p1.x + (B) * l.p1.y + (C)))/sqrt(pow(A, 2) + pow(B, 2))
+      return (abs((A) * l.p1.x() + (B) * l.p1.y() + (C)))/sqrt(pow(A, 2) + pow(B, 2))
     }
 }
 */
@@ -67,7 +67,7 @@ class Line {
 
     public:
       double length(){
-        return sqrt(pow((p1.x - p2.x),2) + pow((p1.x - p2.x),2)) 
+        return sqrt(pow(p1.x() - p2.x(), 2) + pow(p1.y() - p2.y(), 2));
       }
 };
 
@@ -79,6 +79,13 @@ class Triangle {
     Point p1,p2,p3;
 
   public:
+
+    Triangle(Point p1g, Point p2g, Point p3g){
+      this -> p1 = p1g;
+      this -> p2 = p2g;
+      this -> p3 = p3g;
+    }
+
     double area(){
 
       /*
@@ -99,7 +106,7 @@ class Triangle {
 class Polygon {
   private:
     std::vector<Point> points;
-    double perimeter = 0;
+    double p_perimeter = 0;
 
   public:
     double area(){
@@ -114,10 +121,10 @@ class Polygon {
 
     double perimeter(){
       for(int i = 1; i < points.size() - 1; i++){
-        perimeter += sqrt(pow(points[i].x - points[i-1].x, 2) + pow(points[i].y - points[i-1].y, 2))
+        p_perimeter += sqrt(pow(points[i].x() - points[i-1].x(), 2) + pow(points[i].y() - points[i-1].y(), 2));
         //check
       }
-      return perimeter;
+      return p_perimeter;
     }
 };
 
@@ -131,19 +138,19 @@ class AUV {
     double angular_speed;
 
   public:
-    void step(double dt){
+    void step(const double &dt){
       //heading?
-      position.x = (position.x + speed[0] * dt);
-      position.y = (position.y + speed[1] * dt);
+      position.setX(position.x() + speed[0] * dt);
+      position.setY(position.y() + speed[1] * dt);
     }
 
-    void apply_acceleration(double a[3], double dt){
+    void apply_acceleration(double a[3], const double &dt){
       for(int i = 0; i < 3; i++){
         speed[i] += (a[i]) * dt;
       }
     }
 
-    void apply_angular_acceleration(double angular_acceleration, double  dt){
+    void apply_angular_acceleration(double angular_acceleration, const double &dt){
       angular_speed += angular_acceleration * dt;
     }
 };
