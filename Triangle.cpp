@@ -1,4 +1,5 @@
 #include "Triangle.hpp"
+#include "Point.hpp"
 #include <cmath>
 
 Triangle::Triangle(Point sp1, Point sp2, Point sp3){

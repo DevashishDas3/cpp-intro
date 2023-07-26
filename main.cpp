@@ -1,11 +1,14 @@
 #include <iostream>
-#include "Point.hpp"
 #include <vector>
 #include <cmath>
 #include <array>
+#include "Point.hpp"
+#include "Line.hpp"
+#include "Polygon.hpp"
+#include "AUV.hpp"
 
 
-
+/*
 class Circle {
     private:
       double radius;
@@ -19,7 +22,7 @@ class Circle {
       }
 };
 
-/*
+
 class Point {
   
   //A point class that holds x and y coordinate points (double) and 
@@ -55,13 +58,13 @@ class Point {
       return (abs((A) * l.p1.x() + (B) * l.p1.y() + (C)))/sqrt(pow(A, 2) + pow(B, 2))
     }
 }
-*/
+
 
 class Line {
-  /*
-  Line class for problems 3 and 4 (contains points p1 and p2 and functionality of
-  finding the length using the distacne formula)
-  */
+  
+  // Line class for problems 3 and 4 (contains points p1 and p2 and functionality of
+  // finding the length using the distacne formula)
+  
     private:
       Point p1,p2;
 
@@ -72,9 +75,9 @@ class Line {
 };
 
 class Triangle {
-  /*
-  Triangle class contains three points
-  */
+  
+  // Triangle class contains three points
+  
   private:
     Point p1,p2,p3;
 
@@ -88,10 +91,10 @@ class Triangle {
 
     double area(){
 
-      /*
-      use herons formula where a = sqrt(s(s-a)(s-b)(s-c)), where s = (a+b+c)/2
+      
+      // use herons formula where a = sqrt(s(s-a)(s-b)(s-c)), where s = (a+b+c)/2
 
-      */
+      
 
       double a = p1.distance_to_point(p2);
       double b = p2.distance_to_point(p3);
@@ -154,6 +157,7 @@ class AUV {
       angular_speed += angular_acceleration * dt;
     }
 };
+*/
 
 
 int subtract(int x, int y){
@@ -193,8 +197,9 @@ int main() {
 
   //Circle instantiation
 
-  Circle newcircle(4);
-  std::cout << newcircle.area() << std::endl;
+  //Circle newcircle(4);
+  //std::cout << newcircle.area() << std::endl;
+  Point devspoint(3.0, 4.0);
 
 
   return 0;

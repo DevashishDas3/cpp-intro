@@ -13,6 +13,7 @@ AUV::AUV(std::string sname, Point sposition, double sdepth, double sheading, dou
 }
 
 void AUV::step(const doubl &dt){
+    heading += angular_speed * dt;
     position.setX(position.x() + speed[0] * dt);
     position.setY(position.y() + speed[1] * dt);
 }

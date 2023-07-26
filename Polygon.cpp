@@ -1,5 +1,6 @@
 #include "Polygon.hpp"
-#include "Triangle.hpp"
+#include "Polygon.hpp"
+#include "Point.hpp"
 #include <cmath>
 #include <vector>
 
@@ -18,7 +19,8 @@ double Polygon::area(){
 
 double Polygon::perimeter(){
     for(int i = 1; i < points.size() - 1; i++){
-        p_perimeter += sqrt(pow(points[i].x() - points[i-1].x(), 2) + pow(points[i].y() - points[i-1].y(), 2));
+        p_perimeter += (points[i].distance_to_point(points[i+1]));
     }
+    p_perimeter += (points[points.size() - 1].distance_to_point(points[0]));
     return p_perimeter;
 }
